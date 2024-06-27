@@ -1,0 +1,63 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar {
+  background-color: #343a40 !important;
+}
+.navbar-brand {
+  color: #ffffff !important;
+}
+.navbar-brand:hover {
+  color: #cccccc !important;
+}
+.carousel-inner {
+  height: 450px; /* Adjust height as needed */
+  overflow: hidden;
+}
+.carousel-item {
+  height: 100%;
+}
+.carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 79%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-indicators [data-bs-target] {
+  background-color: #343a40;
+}
+.section-header {
+  background-color: #6c757d;
+  padding: 20px;
+  color: #ffffff;
+}
+.category-icons img {
+  width: 100px;
+  height: auto;
+  transition: transform 0.3s;
+}
+.category-icons img:hover {
+  transform: scale(1.2);
+}
+.popular-recipes {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 20px;
+}
+.footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 20px;
+}
+.social-links a {
+  font-size: 55px;
+  color: #ffffff;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+.social-links a:hover {
+  color: #cccccc;
+}

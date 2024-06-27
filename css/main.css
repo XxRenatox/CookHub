@@ -1,0 +1,59 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.container-recetas, .container-perfil{
+    display: none; /* Ocultar ambos divs inicialmente */
+}
+.container-perfil {
+    display: flex;
+}
+.seccion-recetas {
+    background-color: #6c757d;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.container-recetas {
+    flex-direction: column;
+}
+
+.footer {
+    text-align: center;
+    margin-top: auto; /* Empuja el footer al final del contenedor */
+    padding: 20px;
+    position: relative;
+    background: rgba(44, 62, 80, 0.7); /* Fondo semi-transparente */
+    color: white; /* Color del texto */
+}
+
+.premium-message {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3); /* Fondo semi-transparente */
+    backdrop-filter: blur(5px); /* Efecto de difuminado */
+    border-radius: 8px; /* Esquinas redondeadas */
+}
+
+.premium-message a {
+    color: #fff; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+    font-weight: bold;
+    padding: 5px 10px;
+    background-color: #E74C3C; /* Color del botón */
+    border-radius: 5px;
+}
+
+.premium-message a:hover {
+    background-color: #c0392b; /* Color del botón al pasar el cursor */
+}
+
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #2C3E50; /* Puedes ajustar el color de fondo según tus preferencias */
+    color: white; /* Color del texto */
+    border-radius: 8px; /* Opcional: si deseas esquinas redondeadas */
+}
