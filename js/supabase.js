@@ -74,7 +74,7 @@ export const insertPref = async (pref) => {
 }
 
 // Insertar productos
-export const insertProducts = async (produc1, produc2, produc3, produc4) => {
+export const insertProducts = async (product1, product2, product3, product4) => {
   const userId = localStorage.getItem('userId')
   const { data, error } = await supabase
     .from('Productos')
@@ -88,10 +88,10 @@ export const insertProducts = async (produc1, produc2, produc3, produc4) => {
   const { error: insertError } = await supabase
     .from('Productos')
     .insert({
-      producto1: produc1,
-      producto2: produc2,
-      producto3: produc3,
-      producto4: produc4,
+      producto1: product1,
+      producto2: product2,
+      producto3: product3,
+      producto4: product4,
       fk_id_usuario: userId
     })
 

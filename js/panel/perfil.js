@@ -112,10 +112,12 @@ document.getElementById("btnUpdate").addEventListener("click", async () => {
   document.getElementById('select-pref').value = pref[0].preferencia
 
   // Actualizar campos de productos con los productos actuales
-  document.getElementById("select1").value = products[0].producto1
-  document.getElementById("select2").value = products[0].producto2 || ""
-  document.getElementById("select3").value = products[0].producto3 || ""
-  document.getElementById("select4").value = products[0].producto4 || ""
+  products[1].forEach(products => {
+    document.getElementById("select1").value = products.producto1 
+    document.getElementById("select2").value = products.producto2 
+    document.getElementById("select3").value = products.producto3 
+    document.getElementById("select4").value = products.producto4 
+  })
 
   document.getElementById("sendData").innerHTML = "Modificar"
 })
@@ -134,24 +136,23 @@ document.getElementById("sendData").addEventListener("click", async () => {
     const pref = document.getElementById('select-pref').value
 
     // Llamar a funciones para actualizar productos y preferencia
-    updateProducts(product1, product2, product3, product4)
-    updatePref(pref)
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Éxito",
-          text: "Productos actualizados correctamente",
-        })
-        sendDataButton.innerHTML = "Enviar Datos"
+    try {
+      await updateProducts(product1, product2, product3, product4)
+      await updatePref(pref)
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Productos y preferencia actualizados correctamente",
       })
-      .catch((error) => {
-        console.error("Error al modificar los productos:", error.message)
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Hubo un problema al modificar los productos",
-        })
+      sendDataButton.innerHTML = "Enviar Datos"
+    } catch (error) {
+      console.error("Error al modificar los productos:", error.message)
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al modificar los productos",
       })
+    }
   } 
   // Si el botón dice "Enviar Datos", se guardarán los productos y preferencia
   else if (sendDataButton.innerHTML === "Enviar Datos") {
@@ -170,22 +171,6 @@ document.getElementById("sendData").addEventListener("click", async () => {
     const selectPref = document.getElementById("select-pref")
     const pref = selectPref.options[selectPref.selectedIndex].value
 
-    // Verificar si ya se ha enviado información de productos
-    let hasSentData = false
-
-    const productData = await getProducts()
-    hasSentData = productData
-
-    // Si no se han enviado datos previamente, mostrar mensaje de error
-    if (!hasSentData) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Si quieres modificar tu información haz clic en el botón Modificar datos",
-      })
-      return
-    }
-
     // Validar que se haya seleccionado el primer producto y la preferencia
     if (product1 === "Productos" || pref === "Preferencia") {
       Swal.fire({
@@ -194,49 +179,28 @@ document.getElementById("sendData").addEventListener("click", async () => {
         text: "Debes ingresar el primer producto y la preferencia",
       })
     } else {
-      // Mostrar mensaje de éxito al guardar los datos
-      Swal.fire({
-        title: "Registro",
-        text: "¡Ingreso de productos y preferencia completado!",
-        icon: "success",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-            // Insertar nuevos productos y preferencia en la base de datos
-            const insertProductsResult = await insertProducts(
-              product1,
-              product2,
-              product3,
-              product4
-            )
-            const insertPrefResult = await insertPref(pref)
-
-            // Mostrar mensaje de éxito si se guardaron correctamente los datos
-            if (insertProductsResult && insertPrefResult) {
-              Swal.fire({
-                icon: "success",
-                title: "Éxito",
-                text: "Datos guardados correctamente",
-              }).then(() => {
-                document.getElementById("sendData").disabled = true
-              })
-            } else {
-              throw new Error("Hubo un problema al guardar los datos")
-            }
-          } catch (error) {
-            console.error(error)
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Hubo un problema al guardar los datos",
-            })
-          }
-        }
-      })
+      try {
+        // Insertar nuevos productos y preferencia en la base de datos
+        await insertProducts(product1, product2, product3, product4)
+        await insertPref(pref)
+        Swal.fire({
+          icon: "success",
+          title: "Éxito",
+          text: "Datos guardados correctamente",
+        }).then(() => {
+          document.getElementById("sendData").disabled = true
+        })
+      } catch (error) {
+        console.error("Error al guardar los datos:", error.message)
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Hubo un problema al guardar los datos",
+        })
+      }
     }
   }
 })
-
 // Evento para el botón de eliminar cuenta
 document.getElementById("btnDelete").addEventListener("click", () => {
   // Mostrar confirmación antes de eliminar la cuenta

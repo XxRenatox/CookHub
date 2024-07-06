@@ -1,0 +1,107 @@
+body {
+    background-color: #f7f7f7;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: #343a40 !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.navbar-brand:hover {
+    color: #cccccc !important;
+}
+
+.plan-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    height: 500px;
+    width: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.5s;
+}
+.plan-card-header {
+    background-color:#E74C3C;
+    color: white;
+    padding: 10px 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin: -20px -20px 20px -20px;
+}
+.plan-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+.plan-card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+.plan-card .price {
+    font-size: 2rem;
+    color:#E74C3C;
+    margin-bottom: 15px;
+}
+.plan-card .discount {
+    font-size: 1rem;
+    color: #f57c00;
+    margin-bottom: 15px;
+}
+.plan-card .btn {
+    background-color:#E74C3C;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+.plan-card:hover {
+    border-color: #000000;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: scale(1.1);
+}
+
+.category-icons img {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.category-icons img:hover {
+    transform: scale(1.2);
+}
+
+.popular-recipes {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.social-links a {
+    font-size: 55px;
+    color: #ffffff;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #cccccc;
+}

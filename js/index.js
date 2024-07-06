@@ -116,17 +116,11 @@ const cargarListas = (index, detalleReceta) => {
 
 // Event listener para cuando el contenido del DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", async ()=> {
-  let cantidadRecetas = 3
   // Función para obtener las recetas basadas en las preferencias
   const obtenerRecetas = (preferencias) => {
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${preferencias}`)
       .then(response => response.json())
       .then(async data => {
-        const userData = await getUserId() // Obtener información del usuario
-        if (userData.length === 1){
-          cantidadRecetas = 6
-        }
-
         const recetas = data.meals.slice(0, 3);
 
         recetas.forEach((receta, index) => {
@@ -172,6 +166,13 @@ document.addEventListener("DOMContentLoaded", async ()=> {
         window.location.href = `templates/panels/categories/${category}.html?category=${category}`
       });
     });
+
+document.getElementById("btnBuscar").addEventListener("click", async (e) => {
+  e.preventDefault()
+  const ingredient = document.getElementById("search-bar").value
+  window.location.href = `templates/panels/search.html?ingredient=${ingredient}`
+})
+
 
 // Event listener para el botón de favoritos
 document.getElementById("btnFav").addEventListener("click", async () => {

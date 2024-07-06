@@ -1,4 +1,4 @@
-import { getUserId } from "../../supabase.js";
+import { getUserId } from "../supabase.js";
 // Función para generar el HTML de una receta
 const generarHTMLReceta = (receta, index) => {
   const html = `
@@ -93,10 +93,8 @@ const getQueryParameter = (name) => {
 document.addEventListener("DOMContentLoaded", async () => {
   let cantidadRecetas = 3
   // Función para obtener las recetas basadas en las preferencias del usuario
-  const obtenerRecetas = (preferencias) => {
-    fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${preferencias}`
-    )
+  const obtenerRecetas = (ingredient) => {
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
       .then((response) => response.json())
       .then( async (data) => {
         const userData = await getUserId() // Obtener información del usuario
@@ -113,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               recetaDiv.innerHTML = htmlReceta // Agregar el HTML generado al elemento div
               recetaDiv.classList.add("col-md-4") // Agregar la clase 'receta' al elemento div
               recetaDiv.id = `receta_${index}` // Establecer el ID del elemento div
-              document.getElementById("container-recetas").appendChild(recetaDiv) // Agregar el elemento div al contenedor de recetas
+              document.getElementById("search-div").appendChild(recetaDiv) // Agregar el elemento div al contenedor de recetas
               cargarListas(index, detalleReceta) // Cargar ingredientes e instrucciones de la receta
             })
             .catch((error) =>
@@ -125,5 +123,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Llamar a la función obtenerRecetas con la categoría obtenida de los parámetros de consulta
-  obtenerRecetas(getQueryParameter("category"))
+  obtenerRecetas(getQueryParameter("ingredient"))
 })
