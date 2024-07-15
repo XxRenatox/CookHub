@@ -1,4 +1,4 @@
-import { getFav, getUserId } from "./supabase.js";
+import { getFav } from "./supabase.js";
 
 // Diccionario para traducir los nombres de las categorías al español
 const traducciones = {
@@ -144,12 +144,12 @@ document.addEventListener("DOMContentLoaded", async ()=> {
     // Función para generar el HTML de un botón
     const generarHTMLBoton = (ingredient) => {
       const html = `
-      <div class="col">
-        <button class="btn rounded-circle" style="width: 163px;" id="${ingredient.id}">
-          <img src="${ingredient.imgSrc}" alt="${ingredient.strCategory}" width="150px" class="img-fluid rounded-circle">
-          <p>${traducciones[ingredient.strCategory] || ingredient.strCategory}</p>
-        </button>
-      </div>`;
+        <div class="col-6 col-md-4 col-lg-3">
+          <button class="btn p-0 border-0" id="${ingredient.id}">
+            <img src="${ingredient.imgSrc}" alt="${ingredient.strCategory}" class="img-fluid rounded-circle">
+            <p class="mt-2">${traducciones[ingredient.strCategory] || ingredient.strCategory}</p>
+          </button>
+        </div>`;
       return html;
     };
   
@@ -163,16 +163,25 @@ document.addEventListener("DOMContentLoaded", async ()=> {
       document.getElementById(ingredient.id).addEventListener("click", () => {
         // Abrir una nueva pestaña con la URL adecuada
         const category = ingredient.strCategory;
-        window.location.href = `templates/panels/categories/${category}.html?category=${category}`
+        window.location.href = `templates/panels/categories.html?category=${category}`
       });
     });
 
 document.getElementById("btnBuscar").addEventListener("click", async (e) => {
   e.preventDefault()
   const ingredient = document.getElementById("search-bar").value
-  window.location.href = `templates/panels/search.html?ingredient=${ingredient}`
+  if(ingredient.trim() != ""){
+    window.location.href = `templates/panels/search.html?ingredient=${ingredient}`
+  }
 })
 
+document.getElementById("btnLogin").addEventListener("click", async () => {
+  if(!localStorage.getItem("userId")){
+    window.location.href = "templates/auth/login.html"
+  } else {
+    window.location.href = "templates/panels/userPanel.html"
+  }
+})
 
 // Event listener para el botón de favoritos
 document.getElementById("btnFav").addEventListener("click", async () => {

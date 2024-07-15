@@ -86,8 +86,7 @@ const cargarInfo = async () => {
   // Verificar si se encontró información del usuario y actualizar elementos en el DOM
   if (userData.length === 1) {
     document.getElementById("email").textContent = userData[0].email
-    document.getElementById("Preferencia").textContent =
-      traducciones[userPref[0].preferencia]
+    document.getElementById("Preferencia").textContent = traducciones[userPref[0].preferencia]
   } else {
     console.error("No se encontró información del usuario")
   }
@@ -101,6 +100,11 @@ window.addEventListener("DOMContentLoaded", function () {
   cargarOpciones("select3") // Cargar opciones en el tercer select
   cargarOpciones("select4") // Cargar opciones en el cuarto select
   cargarPref("select-pref") // Cargar preferencias en el select de preferencias
+})
+
+document.getElementById("close-session").addEventListener("click", () => {
+  localStorage.clear()
+  window.location.href = "../../index.html"
 })
 
 // Evento para el botón de actualizar

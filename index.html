@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,8 +18,8 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item me-5 mt-3">
-            <form class="d-flex" id="search-bar-form">
-              <input type="text" placeholder="Ingresa un Ingrediente" class="form-control" style="width: 300px;" id="search-bar">
+            <form class="d-flex" id="search-bar-form" role="search">
+              <input type="text" placeholder="Ingresa un Ingrediente" class="form-control" style="width: 500px;" id="search-bar">
               <button class="btn btn-success ms-2" id="btnBuscar">Buscar</button>
             </form>
           </li>
@@ -31,11 +30,11 @@
                 🥨<span class="visually-hidden"></span></span>
             </button>
           </li>
-          <li class="nav-item mt-2">
-            <a href="templates/auth/login.html" class="nav-link text-light">
+          <li class="nav-item mt-2 ">
+            <button class="nav-link text-light btn" id="btnLogin">
               <img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIPBG6zQECa6dH40lWKyCc4nGhHpCmHyApv-Ised0lGQ&s" alt="Auth Image" width="35px" />
               ¡Registrate aqui!
-            </a>
+            </button>
           </li>
         </ul>
       </div>
@@ -47,11 +46,10 @@
       <h5 class="offcanvas-title" id="staticBackdropLabel">Recetas Favoritas</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body" id="seccion-recetasFav">
-    </div>
+    <div class="offcanvas-body" id="seccion-recetasFav"></div>
   </div>
 
-  <div class="d-flex justify-content-center mb-4">
+  <div class="d-flex justify-content-center mb-4 mt-3">
     <div id="carouselExampleFade" class="carousel slide carousel-fade w-75" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -99,17 +97,15 @@
   <div class="section-header text-center">
     <h1>Sección de Categorías</h1>
   </div>
-  <div class="container my-4" >
-    <div class="row text-center category-icons " id="seccion-categorias">
-    </div>
+  <div class="container my-4">
+    <div class="row text-center category-icons" id="seccion-categorias"></div>
   </div>
 
   <div class="section-header text-center">
     <h1>Recetas Populares</h1>
   </div>
   <div class="container popular-recipes">
-    <div class="row" id="container-recetas">
-    </div>
+    <div class="row" id="container-recetas"></div>
   </div>
 
   <footer class="footer text-center mt-1">
@@ -138,5 +134,4 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <script src="js/index.js" type="module"></script>
 </body>
-
 </html>

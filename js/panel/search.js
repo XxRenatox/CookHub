@@ -1,4 +1,4 @@
-import { getUserId } from "../supabase.js";
+
 // Función para generar el HTML de una receta
 const generarHTMLReceta = (receta, index) => {
   const html = `
@@ -97,8 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
       .then((response) => response.json())
       .then( async (data) => {
-        const userData = await getUserId() // Obtener información del usuario
-        if (userData !== "null"){
+        if (localStorage.getItem("userId")){
           cantidadRecetas = 6
         }
         const recetas = data.meals.slice(0, cantidadRecetas); // Array de recetas obtenidas de la API

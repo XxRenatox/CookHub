@@ -1,4 +1,19 @@
-import { getUserId } from "../../supabase.js";
+const traducciones = {
+  Lamb: "Cordero",
+  Miscellaneous: "Varios",
+  Pasta: "Pasta",
+  Pork: "Cerdo",
+  Side: "Acompañamiento",
+  Seafood: "Mariscos",
+  Starter: "Entrante",
+  Vegan: "Vegano",
+  Vegetarian: "Vegetariano",
+  Beef: "Res",
+  Breakfast: "Desayuno",
+  Chicken: "Pollo",
+  Dessert: "Postre",
+  Goat: "Cabra",
+};
 // Función para generar el HTML de una receta
 const generarHTMLReceta = (receta, index) => {
   const html = `
@@ -99,8 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     )
       .then((response) => response.json())
       .then( async (data) => {
-        const userData = await getUserId() // Obtener información del usuario
-        if (userData !== "null"){
+        if (localStorage.getItem("userId")){
           cantidadRecetas = 6
         }
         const recetas = data.meals.slice(0, cantidadRecetas); // Array de recetas obtenidas de la API
@@ -126,4 +140,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Llamar a la función obtenerRecetas con la categoría obtenida de los parámetros de consulta
   obtenerRecetas(getQueryParameter("category"))
+  document.getElementById("title").innerHTML = `Recetas de la categoria ${traducciones[getQueryParameter("category")] || getQueryParameter("category")}`
 })
