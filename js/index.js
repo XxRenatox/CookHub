@@ -19,20 +19,20 @@ const traducciones = {
 };
 
 const ingredientes = [
-  { id:1, strCategory: 'Beef', imgSrc: 'https://www.themealdb.com/images/category/beef.png' },
-  { id:2, strCategory: 'Chicken', imgSrc: 'https://www.themealdb.com/images/category/chicken.png' },
-  { id:3, strCategory: 'Vegetarian', imgSrc: 'https://www.themealdb.com/images/category/vegetarian.png' },
-  { id:4, strCategory: 'Pasta', imgSrc: 'https://www.themealdb.com/images/category/pasta.png' },
-  { id:5, strCategory: 'Seafood', imgSrc: 'https://www.themealdb.com/images/category/seafood.png' },
-  { id:6, strCategory: 'Dessert', imgSrc: 'https://www.themealdb.com/images/category/dessert.png' },
-  { id:7, strCategory: 'Miscellaneous', imgSrc: 'https://www.themealdb.com/images/category/miscellaneous.png' },
-  { id:8, strCategory: 'Side', imgSrc: 'https://www.themealdb.com/images/category/side.png' },
-  { id:9, strCategory: 'Lamb', imgSrc: 'https://www.themealdb.com/images/category/lamb.png' },
-  { id:10, strCategory: 'Pork', imgSrc: 'https://www.themealdb.com/images/category/pork.png' },
-  { id:11, strCategory: 'Goat', imgSrc: 'https://www.themealdb.com/images/category/goat.png' },
-  { id:12, strCategory: 'Starter', imgSrc: 'https://www.themealdb.com/images/category/starter.png' },
-  { id:13, strCategory: 'Breakfast', imgSrc: 'https://www.themealdb.com/images/category/breakfast.png' },
-  { id:14, strCategory: 'Vegan', imgSrc: 'https://www.themealdb.com/images/category/vegan.png' }
+  { id: 1, strCategory: 'Beef', imgSrc: 'https://www.themealdb.com/images/category/beef.png' },
+  { id: 2, strCategory: 'Chicken', imgSrc: 'https://www.themealdb.com/images/category/chicken.png' },
+  { id: 3, strCategory: 'Vegetarian', imgSrc: 'https://www.themealdb.com/images/category/vegetarian.png' },
+  { id: 4, strCategory: 'Pasta', imgSrc: 'https://www.themealdb.com/images/category/pasta.png' },
+  { id: 5, strCategory: 'Seafood', imgSrc: 'https://www.themealdb.com/images/category/seafood.png' },
+  { id: 6, strCategory: 'Dessert', imgSrc: 'https://www.themealdb.com/images/category/dessert.png' },
+  { id: 7, strCategory: 'Miscellaneous', imgSrc: 'https://www.themealdb.com/images/category/miscellaneous.png' },
+  { id: 8, strCategory: 'Side', imgSrc: 'https://www.themealdb.com/images/category/side.png' },
+  { id: 9, strCategory: 'Lamb', imgSrc: 'https://www.themealdb.com/images/category/lamb.png' },
+  { id: 10, strCategory: 'Pork', imgSrc: 'https://www.themealdb.com/images/category/pork.png' },
+  { id: 11, strCategory: 'Goat', imgSrc: 'https://www.themealdb.com/images/category/goat.png' },
+  { id: 12, strCategory: 'Starter', imgSrc: 'https://www.themealdb.com/images/category/starter.png' },
+  { id: 13, strCategory: 'Breakfast', imgSrc: 'https://www.themealdb.com/images/category/breakfast.png' },
+  { id: 14, strCategory: 'Vegan', imgSrc: 'https://www.themealdb.com/images/category/vegan.png' }
 ];
 
 // Función para obtener los detalles de una receta por su ID
@@ -115,7 +115,7 @@ const cargarListas = (index, detalleReceta) => {
 };
 
 // Event listener para cuando el contenido del DOM esté completamente cargado
-document.addEventListener("DOMContentLoaded", async ()=> {
+document.addEventListener("DOMContentLoaded", async () => {
   // Función para obtener las recetas basadas en las preferencias
   const obtenerRecetas = (preferencias) => {
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${preferencias}`)
@@ -139,77 +139,77 @@ document.addEventListener("DOMContentLoaded", async ()=> {
   };
   obtenerRecetas("Beef");
   // Crear botones para cada categoría
-    const container = document.getElementById('seccion-categorias');
-  
-    // Función para generar el HTML de un botón
-    const generarHTMLBoton = (ingredient) => {
-      const html = `
-        <div class="col-6 col-md-4 col-lg-3">
+  const container = document.getElementById('seccion-categorias');
+
+  // Función para generar el HTML de un botón
+  const generarHTMLBoton = (ingredient) => {
+    const html = `
+        <div class="col-md-2">
           <button class="btn p-0 border-0" id="${ingredient.id}">
             <img src="${ingredient.imgSrc}" alt="${ingredient.strCategory}" class="img-fluid rounded-circle">
             <p class="mt-2">${traducciones[ingredient.strCategory] || ingredient.strCategory}</p>
           </button>
         </div>`;
-      return html;
-    };
-  
-    // Recorrer los ingredientes y crear botones dinámicamente
-    ingredientes.forEach((ingredient) => {
-      container.innerHTML += generarHTMLBoton(ingredient);
+    return html;
+  };
+
+  // Recorrer los ingredientes y crear botones dinámicamente
+  ingredientes.forEach((ingredient) => {
+    container.innerHTML += generarHTMLBoton(ingredient);
+  });
+
+  // Añadir eventos después de que los botones se hayan agregado al DOM
+  ingredientes.forEach((ingredient) => {
+    document.getElementById(ingredient.id).addEventListener("click", () => {
+      // Abrir una nueva pestaña con la URL adecuada
+      const category = ingredient.strCategory;
+      window.location.href = `templates/panels/categories.html?category=${category}`
     });
-  
-    // Añadir eventos después de que los botones se hayan agregado al DOM
-    ingredientes.forEach((ingredient) => {
-      document.getElementById(ingredient.id).addEventListener("click", () => {
-        // Abrir una nueva pestaña con la URL adecuada
-        const category = ingredient.strCategory;
-        window.location.href = `templates/panels/categories.html?category=${category}`
-      });
-    });
+  });
 
-document.getElementById("btnBuscar").addEventListener("click", async (e) => {
-  e.preventDefault()
-  const ingredient = document.getElementById("search-bar").value
-  if(ingredient.trim() != ""){
-    window.location.href = `templates/panels/search.html?ingredient=${ingredient}`
-  }
-})
+  document.getElementById("btnBuscar").addEventListener("click", async (e) => {
+    e.preventDefault()
+    const ingredient = document.getElementById("search-bar").value
+    if (ingredient.trim() != "") {
+      window.location.href = `templates/panels/search.html?ingredient=${ingredient}`
+    }
+  })
 
-document.getElementById("btnLogin").addEventListener("click", async () => {
-  if(!localStorage.getItem("userId")){
-    window.location.href = "templates/auth/login.html"
-  } else {
-    window.location.href = "templates/panels/userPanel.html"
-  }
-})
+  document.getElementById("btnLogin").addEventListener("click", async () => {
+    if (!localStorage.getItem("userId")) {
+      window.location.href = "templates/auth/login.html"
+    } else {
+      window.location.href = "templates/panels/userPanel.html"
+    }
+  })
 
-// Event listener para el botón de favoritos
-document.getElementById("btnFav").addEventListener("click", async () => {
-  try {
+  // Event listener para el botón de favoritos
+  document.getElementById("btnFav").addEventListener("click", async () => {
+    try {
       const ids = await getFav(); // Obtener los IDs de las recetas favoritas
       const div = document.getElementById("seccion-recetasFav");
       div.innerHTML = ""; // Limpiar el contenido existente en el contenedor
 
       // Iterar sobre cada ID de receta favorita
       for (let i = 0; i < ids.length; i++) {
-          const detalleReceta = await obtenerDetallesReceta(ids[i]); // Obtener detalles de la receta por ID
+        const detalleReceta = await obtenerDetallesReceta(ids[i]); // Obtener detalles de la receta por ID
 
-          // Generar HTML para la receta
-          const htmlReceta = generarHTMLReceta(detalleReceta, i);
-          const recetaDiv = document.createElement("div");
-          recetaDiv.innerHTML = htmlReceta;
-          recetaDiv.classList.add("receta");
-          recetaDiv.id = `receta_${i}`;
-          
-          // Agregar el div de la receta al contenedor
-          div.appendChild(recetaDiv);
-          
-          // Cargar listas de ingredientes e instrucciones
-          cargarListas(i, detalleReceta);
+        // Generar HTML para la receta
+        const htmlReceta = generarHTMLReceta(detalleReceta, i);
+        const recetaDiv = document.createElement("div");
+        recetaDiv.innerHTML = htmlReceta;
+        recetaDiv.classList.add("receta");
+        recetaDiv.id = `receta_${i}`;
+
+        // Agregar el div de la receta al contenedor
+        div.appendChild(recetaDiv);
+
+        // Cargar listas de ingredientes e instrucciones
+        cargarListas(i, detalleReceta);
       }
-  } catch (error) {
+    } catch (error) {
       console.error("Error al obtener o mostrar las recetas favoritas:", error);
       // Aquí podrías agregar una lógica para manejar el error, por ejemplo, mostrar un mensaje al usuario
-  }
+    }
   });
 });
